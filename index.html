@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vehicle Valuation System — AI-Powered Vehicle Price Prediction Platform. Graduation Project 2026.">
+  <meta name="keywords" content="vehicle valuation, machine learning, price prediction, graduation project, AI">
+  <meta name="author" content="Vehicle Valuation Team">
+  <title>Vehicle Valuation System | AI-Powered Price Prediction</title>
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Luxury Loading Screen -->
+  <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading presentation">
+    <div class="loader__inner">
+      <div class="loader__logo">VVS</div>
+      <div class="loader__bar"><span class="loader__progress"></span></div>
+      <p class="loader__text">Vehicle Valuation System</p>
+    </div>
+  </div>
+
+  <!-- Theme Transition Overlay -->
+  <div class="theme-overlay" id="themeOverlay" aria-hidden="true"></div>
+
+  <!-- Particle Canvas Background -->
+  <canvas class="particle-canvas" id="particleCanvas" aria-hidden="true"></canvas>
+
+  <!-- Mouse Spotlight -->
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true">
+    <div class="scroll-progress__glow"></div>
+  </div>
+
+  <!-- Section Navigation Dots -->
+  <nav class="section-nav" id="sectionNav" aria-label="Section navigation">
+    <ul class="section-nav__list" id="sectionNavList"></ul>
+  </nav>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle magnetic-btn" id="themeToggle" aria-label="Toggle light and dark mode" title="Toggle theme">
+    <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀</span>
+    <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">☾</span>
+  </button>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top magnetic-btn" id="scrollTop" aria-label="Scroll to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <!-- Navigation -->
+  <nav class="navbar glass-navbar" id="navbar" aria-label="Main navigation">
+    <div class="navbar__inner container">
+      <a href="#home" class="navbar__logo" aria-label="Vehicle Valuation System — Home">
+        <span class="navbar__logo-mark">VVS</span>
+        <span class="navbar__logo-text">Vehicle Valuation</span>
+      </a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="#home" class="nav-link active" aria-current="page">Home</a></li>
+        <li><a href="#problem" class="nav-link">Problem</a></li>
+        <li><a href="#objectives" class="nav-link">Objectives</a></li>
+        <li><a href="#dataset" class="nav-link">Dataset</a></li>
+        <li><a href="#preprocessing" class="nav-link">Preprocessing</a></li>
+        <li><a href="#machine-learning" class="nav-link">Machine Learning</a></li>
+        <li><a href="#architecture" class="nav-link">Architecture</a></li>
+        <li><a href="#technology" class="nav-link">Technology</a></li>
+        <li><a href="#demo" class="nav-link">Demo</a></li>
+        <li><a href="#results" class="nav-link">Results</a></li>
+        <li><a href="#future-work" class="nav-link">Future Work</a></li>
+        <li><a href="#team" class="nav-link">Team</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ==================== HERO / HOME ==================== -->
+    <section class="hero section" id="home" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__gradient"></div>
+        <div class="hero__gradient-overlay"></div>
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__blob hero__blob--3"></div>
+        <div class="hero__grid"></div>
+        <div class="hero__car-silhouette" aria-hidden="true">
+          <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="car-body" d="M40 70h320c8 0 14-6 14-14V50c0-12-10-22-22-22h-40l-20-18c-4-4-10-6-16-6H90c-6 0-12 2-16 6L54 28H34C22 28 12 38 12 50v6c0 8 6 14 14 14h14z" stroke="currentColor" stroke-width="1.5"/>
+            <circle class="car-wheel" cx="100" cy="70" r="18" stroke="currentColor" stroke-width="1.5"/>
+            <circle class="car-wheel" cx="300" cy="70" r="18" stroke="currentColor" stroke-width="1.5"/>
+            <path class="car-window" d="M110 30h80l20 18H90l20-18z" stroke="currentColor" stroke-width="1"/>
+            <path class="car-line" d="M60 55h280" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="hero__floating-icons" aria-hidden="true">
+          <span class="hero__float-icon hero__float-icon--1">⚡</span>
+          <span class="hero__float-icon hero__float-icon--2">🤖</span>
+          <span class="hero__float-icon hero__float-icon--3">📊</span>
+          <span class="hero__float-icon hero__float-icon--4">🚗</span>
+        </div>
+      </div>
+
+      <div class="container hero__content">
+        <div class="hero__text reveal">
+          <span class="hero__badge">Graduation Project 2026</span>
+          <h1 class="hero__title" id="hero-title">
+            <span class="typing-text" data-text="Vehicle Valuation System">Vehicle Valuation System</span>
+          </h1>
+          <p class="hero__subtitle">
+            <span class="typing-subtitle" data-text="AI-Powered Vehicle Price Prediction Platform"></span>
+          </p>
+
+          <div class="hero__meta">
+            <div class="meta-card tilt-card">
+              <span class="meta-card__label">Supervisor</span>
+              <span class="meta-card__value" contenteditable="true" spellcheck="false">Dr. [Shereen Zaki]</span>
+            </div>
+            <div class="meta-card tilt-card">
+              <span class="meta-card__label">Teaching Assistants</span>
+              <span class="meta-card__value" contenteditable="true" spellcheck="false">Eng. [Toka Mostafa]</span>
+            </div>
+          </div>
+
+          <div class="hero__actions">
+            <a href="#problem" class="btn btn--primary ripple-btn magnetic-btn">Start Presentation</a>
+            <a href="#demo" class="btn btn--secondary ripple-btn magnetic-btn">Explore Project</a>
+            <a href="#objectives" class="btn btn--ghost ripple-btn magnetic-btn">Scroll Down</a>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal reveal--delay">
+          <div class="image-placeholder glow-border" data-src="assets/images/hero.png" data-label="Hero Image">
+            <!-- Replace with Hero Image -->
+            <img src="Assets/images/images (2).jfif" alt="Vehicle Valuation System hero illustration" class="placeholder-img" loading="eager">
+          </div>
+
+          <div class="team-card glass-card tilt-card">
+            <h3 class="team-card__title">Project Team</h3>
+            <!-- Updated to 6 Members -->
+            <ul class="team-card__list team-card__list--six">
+              <li><span class="team-card__avatar">1</span><span contenteditable="true" spellcheck="false">Mohamed Mahmoud Mohamed Metwally</span></li>
+              <li><span class="team-card__avatar">2</span><span contenteditable="true" spellcheck="false">Ayman Ehap</span></li>
+              <li><span class="team-card__avatar">3</span><span contenteditable="true" spellcheck="false">Mohamed Elsayed Hashem</span></li>
+              <li><span class="team-card__avatar">4</span><span contenteditable="true" spellcheck="false">Mohamed Abdelrahman</span></li>
+              <li><span class="team-card__avatar">5</span><span contenteditable="true" spellcheck="false">Yousef khaled Abdullah rasheed</span></li>
+              <li><span class="team-card__avatar">6</span><span contenteditable="true" spellcheck="false">salah elsayed abdelazeem </span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <a href="#problem" class="scroll-indicator" aria-label="Scroll to next section">
+        <span class="scroll-indicator__mouse">
+          <span class="scroll-indicator__wheel"></span>
+        </span>
+        <span class="scroll-indicator__text">Scroll</span>
+      </a>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 0 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== INTRO / HOME CONTENT ==================== -->
+    <section class="section section--alt" id="intro" aria-labelledby="intro-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">Overview</span>
+          <h2 class="section-title title-reveal" id="intro-title">Welcome to Our Project</h2>
+          <p class="section-desc">An intelligent platform that leverages machine learning to deliver accurate, transparent, and instant vehicle price predictions.</p>
+        </header>
+
+        <div class="stats-grid">
+          <div class="stat-card glass-card tilt-card reveal">
+            <span class="stat-card__number counter" data-target="15000">0</span>
+            <span class="stat-card__suffix">+</span>
+            <p class="stat-card__label">Vehicles Analyzed</p>
+          </div>
+          <div class="stat-card glass-card tilt-card reveal reveal--delay">
+            <span class="stat-card__number counter" data-target="12">0</span>
+            <p class="stat-card__label">ML Models Compared</p>
+          </div>
+          <div class="stat-card glass-card tilt-card reveal reveal--delay-2">
+            <span class="stat-card__number counter" data-target="94">0</span>
+            <span class="stat-card__suffix">%</span>
+            <p class="stat-card__label">Prediction Accuracy</p>
+          </div>
+          <div class="stat-card glass-card tilt-card reveal reveal--delay-3">
+            <span class="stat-card__number counter" data-target="5">0</span>
+            <p class="stat-card__label">Integrated Modules</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 40 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== PROBLEM STATEMENT ==================== -->
+    <section class="section" id="problem" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="split-layout">
+          <div class="split-layout__content reveal">
+            <header class="section-header section-header--left">
+              <span class="section-tag">01 — Problem</span>
+              <h2 class="section-title title-reveal" id="problem-title">Problem Statement</h2>
+            </header>
+            <p class="section-desc">The used vehicle market suffers from opaque pricing, inconsistent valuations, and a lack of data-driven tools for buyers, sellers, and dealerships.</p>
+            <ul class="feature-list">
+              <li class="feature-list__item">
+                <span class="feature-list__icon" aria-hidden="true">◆</span>
+                <div>
+                  <strong>Price Uncertainty</strong>
+                  <p>Buyers and sellers struggle to determine fair market value without expert knowledge.</p>
+                </div>
+              </li>
+              <li class="feature-list__item">
+                <span class="feature-list__icon" aria-hidden="true">◆</span>
+                <div>
+                  <strong>Manual Valuation</strong>
+                  <p>Traditional appraisal methods are slow, subjective, and not scalable.</p>
+                </div>
+              </li>
+              <li class="feature-list__item">
+                <span class="feature-list__icon" aria-hidden="true">◆</span>
+                <div>
+                  <strong>Market Volatility</strong>
+                  <p>Rapid changes in demand, mileage, and condition make static pricing unreliable.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="split-layout__visual reveal reveal--right">
+            <div class="image-placeholder image-placeholder--tall glow-border" data-src="assets/images/problem.png" data-label="Problem Image">
+              <!-- Replace with Problem Image -->
+              <img src="Assets/images/ChatGPT Image 11 يوليو 2026، 12_06_10 ص.png" alt="Problem statement illustration" class="placeholder-img" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 0 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== OBJECTIVES ==================== -->
+    <section class="section section--alt" id="objectives" aria-labelledby="objectives-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">02 — Objectives</span>
+          <h2 class="section-title title-reveal" id="objectives-title">Project Objectives</h2>
+          <p class="section-desc">Our goals align technology with real-world impact in the automotive valuation space.</p>
+        </header>
+
+        <div class="objectives-grid">
+          <article class="objective-card glass-card tilt-card reveal">
+            <span class="objective-card__num">01</span>
+            <h3>Accurate Prediction</h3>
+            <p>Build ML models that predict vehicle prices with high precision using historical market data.</p>
+          </article>
+          <article class="objective-card glass-card tilt-card reveal reveal--delay">
+            <span class="objective-card__num">02</span>
+            <h3>End-to-End Pipeline</h3>
+            <p>Design a complete data pipeline from collection and preprocessing to deployment.</p>
+          </article>
+          <article class="objective-card glass-card tilt-card reveal reveal--delay-2">
+            <span class="objective-card__num">03</span>
+            <h3>User-Friendly Platform</h3>
+            <p>Develop an intuitive web interface for instant price predictions and insights.</p>
+          </article>
+          <article class="objective-card glass-card tilt-card reveal reveal--delay-3">
+            <span class="objective-card__num">04</span>
+            <h3>Model Transparency</h3>
+            <p>Compare multiple algorithms and present evaluation metrics clearly to users.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 40 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== DATASET ==================== -->
+    <section class="section" id="dataset" aria-labelledby="dataset-title">
+      <div class="container">
+        <div class="split-layout split-layout--reverse">
+          <div class="split-layout__visual reveal reveal--left">
+            <div class="image-placeholder glow-border" data-src="assets/images/dataset.png" data-label="Dataset Screenshot">
+              <!-- Replace with Dataset Screenshot -->
+              <img src="Assets/images/WhatsApp Image 2026-07-11 at 12.12.17 AM.jpeg" alt="Dataset overview screenshot" class="placeholder-img" loading="lazy">
+            </div>
+          </div>
+          <div class="split-layout__content reveal">
+            <header class="section-header section-header--left">
+              <span class="section-tag">03 — Dataset</span>
+              <h2 class="section-title title-reveal" id="dataset-title">Dataset Overview</h2>
+            </header>
+            <p class="section-desc">A comprehensive automotive dataset featuring vehicle specifications, usage history, and market prices.</p>
+            <div class="info-cards">
+              <div class="info-card">
+                <h4>Features</h4>
+                <p>Make, model, year, mileage, engine size, fuel type, transmission, and more.</p>
+              </div>
+              <div class="info-card">
+                <h4>Target Variable</h4>
+                <p>Vehicle selling price — the value our models learn to predict.</p>
+              </div>
+              <div class="info-card">
+                <h4>Data Quality</h4>
+                <p>Cleaned, normalized, and validated through rigorous preprocessing steps.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 0 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== DATA PREPROCESSING ==================== -->
+    <section class="section section--alt" id="preprocessing" aria-labelledby="preprocessing-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">04 — Preprocessing</span>
+          <h2 class="section-title title-reveal" id="preprocessing-title">Data Preprocessing</h2>
+          <p class="section-desc">Transforming raw data into model-ready features through a systematic cleaning pipeline.</p>
+        </header>
+
+        <div class="split-layout">
+          <div class="split-layout__content reveal">
+            <ol class="pipeline-steps timeline">
+              <li class="pipeline-step timeline-step">
+                <span class="pipeline-step__dot"></span>
+                <div>
+                  <h4>Data Collection</h4>
+                  <p>Gather vehicle records from structured datasets and external sources.</p>
+                </div>
+              </li>
+              <li class="pipeline-step timeline-step">
+                <span class="pipeline-step__dot"></span>
+                <div>
+                  <h4>Missing Value Handling</h4>
+                  <p>Impute or remove incomplete records using statistical methods.</p>
+                </div>
+              </li>
+              <li class="pipeline-step timeline-step">
+                <span class="pipeline-step__dot"></span>
+                <div>
+                  <h4>Encoding & Scaling</h4>
+                  <p>One-hot encode categories and normalize numerical features.</p>
+                </div>
+              </li>
+              <li class="pipeline-step timeline-step">
+                <span class="pipeline-step__dot"></span>
+                <div>
+                  <h4>Feature Engineering</h4>
+                  <p>Create derived features like vehicle age and price-per-mile ratios.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div class="split-layout__visual reveal reveal--right">
+            <div class="image-placeholder glow-border" data-src="assets/images/preprocessing.png" data-label="Data Cleaning Diagram">
+              <!-- Replace with Data Cleaning Diagram -->
+              <img src="Assets/images/ChatGPT Image 11 يوليو 2026، 12_20_47 ص.png" alt="Data preprocessing workflow diagram" class="placeholder-img" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 40 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== MACHINE LEARNING PIPELINE ==================== -->
+    <section class="section" id="machine-learning" aria-labelledby="ml-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">05 — Machine Learning</span>
+          <h2 class="section-title title-reveal" id="ml-title">Machine Learning Pipeline</h2>
+          <p class="section-desc">A structured workflow from feature selection to model deployment and monitoring.</p>
+        </header>
+
+        <div class="split-layout">
+          <div class="split-layout__visual reveal reveal--left">
+            <div class="image-placeholder image-placeholder--wide glow-border" data-src="assets/images/ml-pipeline.png" data-label="ML Pipeline">
+              <!-- Replace with ML Pipeline -->
+              <img src="Assets/images/ChatGPT Image 11 يوليو 2026، 12_25_42 ص.png" alt="Machine learning pipeline diagram" class="placeholder-img" loading="lazy">
+            </div>
+          </div>
+          <div class="split-layout__content reveal">
+            <div class="ml-flow timeline">
+              <div class="ml-flow__item glass-card tilt-card timeline-step">
+                <h4>Train / Test Split</h4>
+                <p>80/20 stratified split ensuring representative samples.</p>
+              </div>
+              <div class="ml-flow__item glass-card tilt-card timeline-step">
+                <h4>Model Training</h4>
+                <p>Linear Regression, Random Forest, XGBoost, Neural Networks.</p>
+              </div>
+              <div class="ml-flow__item glass-card tilt-card timeline-step">
+                <h4>Hyperparameter Tuning</h4>
+                <p>Grid search and cross-validation for optimal performance.</p>
+              </div>
+              <div class="ml-flow__item glass-card tilt-card timeline-step">
+                <h4>Model Selection</h4>
+                <p>Best model chosen based on RMSE, MAE, and R² metrics.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 0 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== MODEL COMPARISON ==================== -->
+    <section class="section section--alt" id="model-comparison" aria-labelledby="comparison-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">06 — Comparison</span>
+          <h2 class="section-title title-reveal" id="comparison-title">Model Comparison</h2>
+          <p class="section-desc">Evaluating multiple algorithms to identify the best-performing model for price prediction.</p>
+        </header>
+
+        <div class="comparison-layout">
+          <div class="image-placeholder glow-border reveal" data-src="assets/images/model-comparison.png" data-label="Model Comparison Chart">
+            <!-- Replace with Model Comparison Chart -->
+            <img src="Assets/images/ef9725e4-3089-4e90-97cb-a02f959f8df5.jfif" alt="Model comparison chart" class="placeholder-img" loading="lazy">
+          </div>
+          <div class="comparison-table-wrap reveal reveal--delay">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>RMSE</th>
+                  <th>MAE</th>
+                  <th>R²</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Linear Regression</td>
+                  <td>4,820</td>
+                  <td>3,150</td>
+                  <td>0.82</td>
+                </tr>
+                <tr>
+                  <td>Random Forest</td>
+                  <td>3,210</td>
+                  <td>2,340</td>
+                  <td>0.89</td>
+                </tr>
+                <tr class="highlight-row">
+                  <td>XGBoost</td>
+                  <td>2,890</td>
+                  <td>2,010</td>
+                  <td>0.94</td>
+                </tr>
+                <tr>
+                  <td>Neural Network</td>
+                  <td>3,540</td>
+                  <td>2,680</td>
+                  <td>0.87</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 40 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== MODEL EVALUATION / RESULTS ==================== -->
+    <section class="section" id="results" aria-labelledby="results-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">07 — Results</span>
+          <h2 class="section-title title-reveal" id="results-title">Model Evaluation</h2>
+          <p class="section-desc">Rigorous testing confirms our model delivers reliable, production-ready predictions.</p>
+        </header>
+
+        <div class="split-layout">
+          <div class="split-layout__content reveal">
+            <div class="metrics-grid">
+              <div class="metric-card glass-card tilt-card">
+                <span class="metric-card__value counter" data-target="94" data-suffix="%">0</span>
+                <span class="metric-card__label">R² Score</span>
+              </div>
+              <div class="metric-card glass-card tilt-card">
+                <span class="metric-card__value">$2,890</span>
+                <span class="metric-card__label">RMSE</span>
+              </div>
+              <div class="metric-card glass-card tilt-card">
+                <span class="metric-card__value">$2,010</span>
+                <span class="metric-card__label">MAE</span>
+              </div>
+              <div class="metric-card glass-card tilt-card">
+                <span class="metric-card__value counter" data-target="98" data-suffix="%">0</span>
+                <span class="metric-card__label">Uptime</span>
+              </div>
+            </div>
+            <p class="section-desc">Cross-validation and holdout testing demonstrate consistent performance across vehicle categories, price ranges, and market segments.</p>
+          </div>
+          <div class="split-layout__visual reveal reveal--right">
+            <div class="image-placeholder glow-border" data-src="assets/images/evaluation.png" data-label="Evaluation Chart">
+              <!-- Replace with Evaluation Chart -->
+              <img src="Assets/images/model .png" alt="Model evaluation chart" class="placeholder-img" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 0 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== SYSTEM ARCHITECTURE ==================== -->
+    <section class="section section--alt" id="architecture" aria-labelledby="architecture-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">08 — Architecture</span>
+          <h2 class="section-title title-reveal" id="architecture-title">System Architecture</h2>
+          <p class="section-desc">A modular, scalable architecture connecting data, ML engine, API, and frontend layers.</p>
+        </header>
+<div class="image-placeholder image-placeholder--wide glow-border reveal">
+    <img src="Assets/images/b0298288-a9d3-41fe-8c36-3e459636fc7c.jfif"
+         alt="System architecture diagram"
+         class="placeholder-img architecture-img"
+         loading="lazy">
+</div>
+        <div class="arch-layers">
+          <div class="arch-layer glass-card tilt-card reveal">
+            <h4>Presentation Layer</h4>
+            <p>Responsive web interface for predictions, dashboards, and user management.</p>
+          </div>
+          <div class="arch-layer glass-card tilt-card reveal reveal--delay">
+            <h4>API Layer</h4>
+            <p>RESTful endpoints serving predictions, model metadata, and analytics.</p>
+          </div>
+          <div class="arch-layer glass-card tilt-card reveal reveal--delay-2">
+            <h4>ML Engine</h4>
+            <p>Trained models, feature transformers, and inference pipeline.</p>
+          </div>
+          <div class="arch-layer glass-card tilt-card reveal reveal--delay-3">
+            <h4>Data Layer</h4>
+            <p>Database storage, caching, and data versioning for reproducibility.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 40 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== TECHNOLOGY STACK ==================== -->
+    <section class="section" id="technology" aria-labelledby="technology-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">09 — Technology</span>
+          <h2 class="section-title title-reveal" id="technology-title">Technology Stack</h2>
+          <p class="section-desc">Modern tools and frameworks powering every layer of the platform.</p>
+        </header>
+
+        <div class="tech-grid">
+          <div class="tech-card glass-card tilt-card reveal">
+            <div class="tech-card__icon">PY</div>
+            <h4>Python</h4>
+            <p>Core language for data science and backend services.</p>
+          </div>
+          <div class="tech-card glass-card tilt-card reveal reveal--delay">
+            <div class="tech-card__icon">SK</div>
+            <h4>Scikit-learn</h4>
+            <p>Classical ML algorithms and preprocessing utilities.</p>
+          </div>
+          <div class="tech-card glass-card tilt-card reveal reveal--delay-2">
+            <div class="tech-card__icon">XG</div>
+            <h4>XGBoost</h4>
+            <p>Gradient boosting for high-accuracy predictions.</p>
+          </div>
+          <div class="tech-card glass-card tilt-card reveal reveal--delay-3">
+            <div class="tech-card__icon">PD</div>
+            <h4>Pandas</h4>
+            <p>Data manipulation, cleaning, and analysis.</p>
+          </div>
+          <div class="tech-card glass-card tilt-card reveal">
+            <div class="tech-card__icon">FL</div>
+            <h4>Flask / FastAPI</h4>
+            <p>Lightweight API framework for model serving.</p>
+          </div>
+          <div class="tech-card glass-card tilt-card reveal reveal--delay">
+            <div class="tech-card__icon">JS</div>
+            <h4>JavaScript</h4>
+            <p>Interactive frontend with vanilla JS architecture.</p>
+          </div>
+          <div class="tech-card glass-card tilt-card reveal reveal--delay-2">
+            <div class="tech-card__icon">SQL</div>
+            <h4>PostgreSQL</h4>
+            <p>Relational database for structured vehicle data.</p>
+          </div>
+          <div class="tech-card glass-card tilt-card reveal reveal--delay-3">
+            <div class="tech-card__icon">DK</div>
+            <h4>Docker</h4>
+            <p>Containerized deployment for reproducibility.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 0 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== WEBSITE DEMO ==================== -->
+    <section class="section section--alt" id="demo" aria-labelledby="demo-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">10 — Demo</span>
+          <h2 class="section-title title-reveal" id="demo-title">Website Demo</h2>
+          <p class="section-desc">Explore the live application interface — from homepage to prediction results.</p>
+        </header>
+
+        <div class="demo-grid">
+          <figure class="demo-item reveal">
+            <div class="image-placeholder glow-border" data-src="assets/images/home-page.png" data-label="Home Page Screenshot">
+              <!-- Replace with Home Page Screenshot -->
+              <img src="Assets/images/home.png" alt="Application home page" class="placeholder-img" loading="lazy">
+            </div>
+            <figcaption>Home Page</figcaption>
+          </figure>
+          <figure class="demo-item reveal reveal--delay">
+            <div class="image-placeholder glow-border" data-src="assets/images/prediction-page.png" data-label="Prediction Page">
+              <!-- Replace with Prediction Page -->
+              <img src="Assets/images/Prediction Page.png" alt="Prediction input page" class="placeholder-img" loading="lazy">
+            </div>
+            <figcaption>Prediction Page</figcaption>
+          </figure>
+          <figure class="demo-item reveal reveal--delay-2">
+            <div class="image-placeholder glow-border" data-src="assets/images/result-page.png" data-label="Prediction Result">
+              <!-- Replace with Prediction Result -->
+              <img src="Assets/images/Prediction Result.png" alt="Prediction result page" class="placeholder-img" loading="lazy">
+            </div>
+            <figcaption>Prediction Result</figcaption>
+          </figure>
+          <figure class="demo-item reveal reveal--delay-3">
+            <div class="image-placeholder glow-border" data-src="assets/images/dashboard.png" data-label="Dashboard">
+              <!-- Replace with Dashboard -->
+              <img src="Assets/images/Screenshot 2026-07-11 000122.png" alt="Analytics dashboard" class="placeholder-img" loading="lazy">
+            </div>
+            <figcaption>Dashboard</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 40 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== SYSTEM WORKFLOW ==================== -->
+    <section class="section" id="workflow" aria-labelledby="workflow-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">11 — Workflow</span>
+          <h2 class="section-title title-reveal" id="workflow-title">System Workflow</h2>
+          <p class="section-desc">From user input to instant price prediction — a seamless end-to-end experience.</p>
+        </header>
+
+        <div class="split-layout">
+          <div class="split-layout__visual reveal reveal--left">
+            <div class="image-placeholder image-placeholder--wide glow-border" data-src="assets/images/workflow.png" data-label="Workflow Diagram">
+              <!-- Replace with Workflow Diagram -->
+              <img src="Assets/images/82f44a18-ee6f-4432-8baa-097532e89763.jfif" alt="System workflow diagram" class="placeholder-img" loading="lazy">
+            </div>
+          </div>
+          <div class="split-layout__content reveal">
+            <div class="workflow-steps timeline">
+              <div class="workflow-step timeline-step">
+                <span class="workflow-step__num">1</span>
+                <div>
+                  <h4>User Input</h4>
+                  <p>Enter vehicle details — make, model, year, mileage, and condition.</p>
+                </div>
+              </div>
+              <div class="workflow-step timeline-step">
+                <span class="workflow-step__num">2</span>
+                <div>
+                  <h4>Data Validation</h4>
+                  <p>Frontend validates inputs; API sanitizes and transforms features.</p>
+                </div>
+              </div>
+              <div class="workflow-step timeline-step">
+                <span class="workflow-step__num">3</span>
+                <div>
+                  <h4>Model Inference</h4>
+                  <p>ML engine processes features and generates price prediction.</p>
+                </div>
+              </div>
+              <div class="workflow-step timeline-step">
+                <span class="workflow-step__num">4</span>
+                <div>
+                  <h4>Result Display</h4>
+                  <p>Predicted price, confidence range, and comparable vehicles shown.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 0 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== FUTURE WORK ==================== -->
+    <section class="section section--alt" id="future-work" aria-labelledby="future-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">12 — Future</span>
+          <h2 class="section-title title-reveal" id="future-title">Future Work</h2>
+          <p class="section-desc">Roadmap for enhancing accuracy, reach, and intelligence of the platform.</p>
+        </header>
+
+        <div class="future-grid">
+          <article class="future-card glass-card tilt-card reveal">
+            <h3>Real-Time Market Data</h3>
+            <p>Integrate live market feeds for dynamic, up-to-date pricing adjustments.</p>
+          </article>
+          <article class="future-card glass-card tilt-card reveal reveal--delay">
+            <h3>Image-Based Valuation</h3>
+            <p>Computer vision models to assess vehicle condition from uploaded photos.</p>
+          </article>
+          <article class="future-card glass-card tilt-card reveal reveal--delay-2">
+            <h3>Mobile Application</h3>
+            <p>Native iOS and Android apps for on-the-go price checks.</p>
+          </article>
+          <article class="future-card glass-card tilt-card reveal reveal--delay-3">
+            <h3>Explainable AI</h3>
+            <p>SHAP values and feature importance to explain every prediction.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 40 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== TEAM ==================== -->
+    <section class="section" id="team" aria-labelledby="team-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="section-tag">13 — Team</span>
+          <h2 class="section-title title-reveal" id="team-title">Meet Our Team</h2>
+          <p class="section-desc">Dedicated students and mentors who brought this project to life.</p>
+        </header>
+
+        <div class="team-layout">
+          <div class="image-placeholder image-placeholder--team glow-border reveal" data-src="assets/images/team.png" data-label="Team Photo">
+            <!-- Replace with Team Photo -->
+            <img src="Assets/images/images.jfif" alt="Project team photo" class="placeholder-img" loading="lazy">
+          </div>
+          
+          <!-- Updated for 6 Members with Track -->
+          <div class="team-members team-members--six">
+            
+            <article class="member-card glass-card tilt-card reveal">
+              <div class="member-card__avatar">TM</div>
+              <h3 contenteditable="true" spellcheck="false">Mohamed Mahmoud</h3>
+              <p class="member-card__role" contenteditable="true" spellcheck="false">Track:<br>Data Analysis & Machine Learning</p>
+            </article>
+
+            <article class="member-card glass-card tilt-card reveal reveal--delay">
+              <div class="member-card__avatar">TM</div>
+              <h3 contenteditable="true" spellcheck="false">Ayman Ehap</h3>
+              <p class="member-card__role" contenteditable="true" spellcheck="false">Track:<br>Data Analysis & Machine Learning</p>
+            </article>
+
+            <article class="member-card glass-card tilt-card reveal reveal--delay-2">
+              <div class="member-card__avatar">TM</div>
+              <h3 contenteditable="true" spellcheck="false">Mohamed ELsayed Hashem</h3>
+              <p class="member-card__role" contenteditable="true" spellcheck="false">Track:<br>Frontend Devoloper</p>
+            </article>
+
+            <article class="member-card glass-card tilt-card reveal reveal--delay-3">
+              <div class="member-card__avatar">TM</div>
+              <h3 contenteditable="true" spellcheck="false">Mohamed Abdelrahman</h3>
+              <p class="member-card__role" contenteditable="true" spellcheck="false">Track:<br>backend Devoloper</p>
+            </article>
+
+            <article class="member-card glass-card tilt-card reveal">
+              <div class="member-card__avatar">TM</div>
+              <h3 contenteditable="true" spellcheck="false">Yousef khaled Abdullah rasheed</h3>
+              <p class="member-card__role" contenteditable="true" spellcheck="false">Track:<br>backend Devoloper</p>
+            </article>
+
+            <article class="member-card glass-card tilt-card reveal reveal--delay">
+              <div class="member-card__avatar">TM</div>
+              <h3 contenteditable="true" spellcheck="false">salah elsayed abdelazeem farg</h3>
+              <p class="member-card__role" contenteditable="true" spellcheck="false">Track:<br>UI UX Designer</p>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path class="separator-path" d="M0 20 Q300 0 600 20 T1200 20" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+    </div>
+
+    <!-- ==================== THANK YOU ==================== -->
+    <section class="section section--thankyou" id="thankyou" aria-labelledby="thankyou-title">
+      <div class="container">
+        <div class="thankyou-content reveal">
+          <span class="section-tag">Finale</span>
+          <h2 class="section-title section-title--large title-reveal" id="thankyou-title">Thank You</h2>
+          <p class="section-desc section-desc--large">We appreciate your time and attention. Questions and feedback are always welcome.</p>
+          <div class="thankyou-actions">
+            <a href="#home" class="btn btn--primary ripple-btn magnetic-btn">Back to Top</a>
+            <a href="#demo" class="btn btn--secondary ripple-btn magnetic-btn">View Demo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo">VVS</span>
+        <p>Graduation Project 2026</p>
+        <p>Vehicle Valuation System</p>
+      </div>
+      <p class="footer__credit">Made with ❤️ by Our Team</p>
+      <p class="footer__copy">&copy; 2026 Vehicle Valuation System. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
